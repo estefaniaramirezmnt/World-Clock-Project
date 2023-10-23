@@ -66,11 +66,11 @@ h2 {
 }
 
 a[href="/"] {
-    color: rgb(114, 64, 96);
+    color: rgb(160, 112, 161);
 }
 
 a[href="/"]:visited {
-    color: rgb(114, 64, 96);
+    color: rgb(160, 112, 161);
 }
 
 footer {
