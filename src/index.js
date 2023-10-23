@@ -45,7 +45,6 @@ function updateCity() {
   `;
 }
 
-// Llama a la función updateCity cada segundo (1000 milisegundos)
 setInterval(updateCity, 1000);
 
 let citySelectElement = document.getElementById("cities-select");
