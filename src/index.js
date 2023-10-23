@@ -4,9 +4,7 @@ function setCityTime(cityId, timeZone) {
   let timeElement = cityElement.querySelector(".time");
 
   function updateTime() {
-    dateElement.textContent = moment()
-        .tz(timeZone)
-        .format(" MMMM Do YYYY");
+    dateElement.textContent = moment().tz(timeZone).format(" MMMM Do YYYY");
     timeElement.innerHTML = moment()
       .tz(timeZone)
       .format("h:mm:ss [<small>]A[</small>]");
@@ -21,12 +19,23 @@ setCityTime("tokyo", "Asia/Tokyo");
 
 function updateCity() {
   let cityTimeZone = document.getElementById("cities-select").value;
+  console.log(cityTimeZone);
   if (cityTimeZone === "current") {
     cityTimeZone = moment.tz.guess();
   }
+
   let cityName = cityTimeZone.split("/")[1].replace("_", " ");
   let cityDate = moment().tz(cityTimeZone).format("MMMM Do YYYY");
-  let cityTime = moment().tz(cityTimeZone).format("h:mm:ss [<small>]A[</small>]");
+  let cityTime = moment()
+    .tz(cityTimeZone)
+    .format("h:mm:ss [<small>]A[</small>]");
+
+  function updateSeconds() {
+    cityTime = moment().tz(cityTimeZone).format("h:mm:ss [<small>]A[</small>]");
+    citiesElement.querySelector(".time").innerHTML = cityTime;
+  }
+
+  setInterval(updateSeconds, 1000);
 
   let citiesElement = document.getElementById("cities-container");
   citiesElement.innerHTML = `
@@ -44,8 +53,6 @@ function updateCity() {
   <a href="/">Refresh</a>
   `;
 }
-
-setInterval(updateCity, 1000);
 
 let citySelectElement = document.getElementById("cities-select");
 citySelectElement.addEventListener("change", updateCity);
